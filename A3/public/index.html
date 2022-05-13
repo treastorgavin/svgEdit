@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CHANGE ME</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+  <!--File log-->  
+  <hr>
+    <div style="overflow-x: scroll">
+      <hr>
+      <h3>File Log</h3>
+      <hr>
+    
+      <table id="fileLogTable" class="table table-fixed">
+        <tr>
+          <th id="file log download">Image (click to download)</th>
+          <th>File name (click to download)</th>
+          <th>File size</th>
+          <th>Number of Rectangles</th>
+          <th>Number of Circles</th>
+          <th>Number of Paths</th>
+          <th>Number of Groups</th>
+        </tr>
+      </table>
+    </div>
+    
+    <!--SVG viewer-->
+    <!--view SVG panel--> 
+    <hr>
+    <h3>SVG viewer</h3>
+    <select id="svgDropDownMenu" name="stuff" value="Choose SVG">
+      <option value="" selected disabled hidden>Choose SVG</option>
+        <!-- JS here-->
+    </select>
+
+    <div id="SVGViewerPanel" class="container">
+        <!-- css properties-->
+    </div>
+
+    <!--EDIT ATTRIBUTES-->
+    <div id="editAttributesPanel">
+      <button id="showAttributesButton">Show Attributes</button>
+      <!--showing and editing attribute-->
+      <button id="editAttributesButton">Edit Attributes</button>
+      <div id="editAttributes" style="display: none">
+        <hr>
+        <p>Edit Attribute</p>
+        <hr>
+  
+        <form ref='changeAttr' id='changeAttr' enctype="multipart/from-data" action="{URL}" method="POST">
+          <label>Shape Type:</label>
+          <input type="text" id="shapeType" name="chooseShapeType">
+          <label>Shape Number:</label>
+          <input type="text" id="shapeNum" name="chooseShapeNum">
+          <label for="attrName">Attribute Name:</label>
+          <input type="text" id="attrName" name="attrName">
+          <label for="attrValue">New Attribute Value:</label>
+          <input type="text" id="attrValue" name="attrValue">
+          <input type="submit" value="Change" class="btn btn-secondary">
+        </form>
+
+      </div>
+      
+    </div>
+
+    <!--CHANGE TITLE OR DESC-->
+    <hr>
+    <h2>Change title/description</h2>
+    <hr>
+    <form ref='changeTitleForm' id='changeTitleForm' enctype="multipart/form-data" action="{URL}" method="POST">
+      <input type="text" id="titleTextBox" name="titleTextBox" maxlength="256">
+      <input type="submit" value="Change Title" class="btn btn-secondary">
+    </form> 
+    <br>
+    <form ref='changeDescForm' id='changeDescForm' enctype="multipart/form-data" action="{URL}" method="POST">
+      <input type="text" id="descTextBox" name="descTextBox" maxlength="256">
+      <input type="submit" value="Change Description" class="btn btn-secondary">
+    </form> 
+      <!--UPLOAD SVG-->
+      <hr>
+      <h3>Upload SVG</h3>
+      <form ref='uploadForm' id='uploadForm' enctype="multipart/form-data" action="{URL}" method="POST">
+        <input type="file" name='uploadFile' id='uploadFile'/>
+        <input type="submit" value="Upload" class="btn btn-secondary">
+      </form>
+    <hr>
+
+    <!--CREATE SVG-->
+    <h2>Create SVG</h2>
+    <form ref='createForm' id='createForm' enctype="multipart/form-data" action="{URL}" method="POST">
+      <label for="fileName">fileName:</label>
+      <input type="text" id="fileName" name="fileName" value=""><br>
+      
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" maxlength="256" value=""><br>
+      
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" maxlength="256" value=""><br>
+      
+      <input type="submit" value="Create SVG" class="btn btn-secondary">
+    </form>
+
+    <!--ADD SHAPE-->
+    <hr>
+    <h2>Add shape</h2>
+    <select id="svgShapeDropDownMenu" name="svgShapeDropDown">
+      <option value="" selected disabled hidden>Choose SVG</option>
+      <!-- JS here-->
+    </select>
+    <h3>Add Rectangle</h3>
+    <form ref='addRectangle' id='addRectangle' enctype="multipart/form-data" action="{URL}" method="POST">
+      <label for="xBox">X Position:</label>
+      <input type="text" id="xBox" name="xBox"><br>
+      
+      <label for="yBox">Y Position:</label>
+      <input type="text" id="yBox" name="yBox"><br>
+      
+      <label for="widthBox">Width:</label>
+      <input type="text" id="widthBox" name="widthBox" ><br>
+      
+      <label for="heightBox">Height:</label>
+      <input type="text" id="heightBox" name="heightBox"><br>
+      
+      <label for="runitsBox">Units:</label>
+      <input type="text" id="runitsBox" name="runitsBox" ><br>
+      
+      <label for="rectangleFillBox">Colour:</label>
+      <input type="text" id="rectangleFillBox" name="rectangleFillBox" ><br>
+      
+      <input type="submit" value="Add Rectangle" class="btn btn-secondary">
+    </form>
+    <br>
+    <h3>Add Circle</h3>
+    <form ref='addCircle' id='addCircle' enctype="multipart/form-data" action="{URL}" method="POST">
+      <label for="cxBox">Horizontal position (cx):</label>
+      <input type="text" id="cxBox" name="cxBox" ><br>
+      
+      <label for="cyBox">Vertical position (cy)</label>
+      <input type="text" id="cyBox" name="cyBox" ><br>
+      
+      <label for="rBox">Radius</label>
+      <input type="text" id="rBox" name="rBox" ><br>
+      
+      <label for="cunitsBox">Units</label>
+      <input type="text" id="cunitsBox" name="cunitsBox"><br>
+      
+      <label for="circleFillBox">Fill</label>
+      <input type="text" id="circleFillBox" name="circleFillBox"><br>
+      
+      <input type="submit" value="Add Circle" class="btn btn-secondary">
+    </form>
+
+    <!--SCALE SHAPES-->
+    <hr>
+    <h2>Scale shape</h2>
+    <select id="scaleShapeDropDownMenu" name="scaleShapeDropDownMenu">
+      <option value="" selected disabled hidden>Choose SVG</option>
+      <!-- JS here-->
+    </select>
+    <h5>Shape Type</h5>
+    <select id="shapeDropDown" name="shapeDropDown">
+      <option value="" selected disabled hidden>Choose shape</option>
+      <option id="1">Rectangle</option>
+      <option id="2">Circle</option>
+    </select>
+    <form ref='scale' id='scale' enctype="multipart/form-data" action="{URL}" method="POST">
+      <label for="scaleBox">Scale by:</label>
+      <input type="text" id="scaleBox" name="scaleBox" value="">
+      <input type="submit" value="Scale" class="btn btn-secondary">
+    </form>
+
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
