@@ -14,7 +14,7 @@ The GUI is simple and was created strictly for demonstrating the functionality o
 ### TESTING CIS2750
 
 ## Fix A1
-    - getRects with hen_and_chicks
+   - getRects with hen_and_chicks
     - getCircles with vest
     - getPaths with vest, beer, hen
     - getGroups with beer, hen, satisfaction
